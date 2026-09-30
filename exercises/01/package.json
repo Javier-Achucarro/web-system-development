@@ -1,0 +1,10 @@
+{
+  "name": "exercise-01",
+  "private": true,
+  "scripts": {
+    "dev": "vite"
+  },
+  "devDependencies": {
+    "vite": "^7.0.0"
+  }
+}
