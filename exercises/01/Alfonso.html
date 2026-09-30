@@ -1,29 +1,29 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Alfonso - Introduction</title>
-  </head>
-  <body>
-    <header>
-      <h1>Alfonso Martinez</h1>
-      <nav>
-        <a href="index.html">Back to menu</a>
+<!DOCTYPE html>                                 <!--para decir que es un documento HTML5-->
+<html>                                          <!--elemento raiz del documento HTML5-->
+  <head>                                        <!--elemento que contiene informacion meta sobre el documento -->
+    <title>Alfonso - Introduction</title>       <!--titulo de la pagina a la que pertenece -->
+  </head> 
+  <body>                                        <!--elemento que contiene el contenido visible de la pagina -->
+    <header>                                    <!--elemento que contiene el encabezado de la pagina -->
+      <h1>Alfonso Martinez</h1>                 <!--titulo de la pagina -->
+      <nav>                                     <!--elemento que contiene la navegación de la pagina -->
+        <a href="index.html">Back to menu</a>   <!--enlace para volver al menú -->
       </nav>
     </header>
 
-    <main>
-      <section>
+    <main>                                      <!--elemento que contiene el contenido principal de la pagina -->
+      <section>                                 <!--elemento que contiene una sección del contenido -->
         <h2>About me</h2>
-        <figure>
-          <img src="images/alfonso.png" width="200" alt="Photo of Alfonso">
+        <figure>                                <!--elemento que hace contener una figura -->
+          <img src="images/alfonso.png" width="200" alt="Photo of Alfonso">            <!--elemento que contiene una imagen-->
         </figure>
-        <p>Hi! I am <strong>Alfonso</strong> and I am trying to do a <em>web</em>.</p>
+        <p>Hi! I am <strong>Alfonso</strong> and I am trying to do a <em>web</em>.</p> <!--elemento que contiene un parrafo -->
       </section>
 
       <section>
         <h2>Interests</h2>
-        <ul>
-          <li>Party</li>
+        <ul>                      <!--elemento que contiene una lista no ordenada -->
+          <li>Party</li>          <!--elemento de lista-->
           <li>Running</li>
           <li>Videogames</li>
         </ul>
@@ -31,15 +31,37 @@
 
       <section>
         <h2>Goals</h2>
-        <ol>
+        <ol>                      <!--elemento que contiene una lista ordenada -->
           <li>Have fun learning web development</li>
           <li>Create a future project based on what is learned in the course</li>
         </ol>
       </section>
+
+      <section>
+        <h2>Schedule</h2>
+          <table>                               <!--elemento que contiene una tabla -->
+            <thead>                             <!--elemento que contiene el encabezado de la tabla -->
+              <tr>                              <!--elemento que contiene una fila -->
+                <th>Day</th>                    <!--elemento que contiene un encabezado de columna -->
+                <th>Availability</th>
+              </tr>
+            </thead>
+            <tbody>                             <!--elemento que contiene el cuerpo de la tabla -->
+              <tr>
+                <td>Monday - Friday</td>        <!--elemento que contiene una celda de la tabla -->
+                <td>Afternoons</td>
+              </tr>
+              <tr>
+                <td>Weekends</td>
+                <td>All day</td>
+              </tr>
+            </tbody>
+          </table>
+      </section>
     </main>
 
-    <footer>
+    <footer>                                                <!--elemento que contiene el pie de pagina -->
       <p>Web System Development - Module 01 Exercise</p>
     </footer>
   </body>
-</html>
+</html>                     <!--los comandos que contengan / son el cierre de los elementos-->
