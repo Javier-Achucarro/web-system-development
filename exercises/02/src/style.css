@@ -1,0 +1,163 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fondo y fuente de toda la pagina */
+body {
+  color: #373535; 
+  background-color: #b6a6a6; 
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-size: 18px;
+}
+
+h1, h2, h3 {
+  font-family: "Georgia", "Times New Roman", serif;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.6em;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 1.2em;
+  margin: 10px 0;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+/*  header  */
+header {
+  color: #FFF;
+  background-color: #4f90da; 
+  padding: 30px 0;
+  text-align: center;
+  border-bottom: 4px solid #4e5153;
+}
+
+header nav {
+  margin-top: 10px;
+}
+
+/*  main  */
+main {
+  width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #FFF;
+  border: 1px solid #5d6063;
+}
+
+section,
+article {
+  margin-bottom: 30px;
+}
+
+img {
+  border: 3px solid #5695dd;
+  margin: 10px 10px 10px 0;
+}
+
+hr {
+  margin-top: 20px;
+}
+
+/*  listas  */
+ul {
+  list-style-type: square;
+  margin-left: 30px;
+}
+
+ol {
+  list-style-type: lower-roman;
+  margin-left: 30px;
+}
+
+li {
+  color: #5995DA;
+  padding: 6px 10px;
+  margin-bottom: 5px;
+  border: 1px solid #d6e9fecf;
+  background-color: #f4f9ffe6;
+}
+
+li:last-of-type {
+  margin-bottom: 0;
+}
+
+/*  enlaces  */
+a:link {
+  color: #0404e7;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #803ead;
+}
+
+a:hover {
+  color: #FF0000;
+  text-decoration: underline;
+}
+
+a:active {
+  color: #990000;
+}
+
+/* Los enlaces de la cabecera van sobre fondo azul */
+header a:link,
+header a:visited {
+  color: #FFF;
+}
+
+header a:hover {
+  color: #FFE08A;
+}
+
+/*  tabla (Alfonso.html)  */
+table {
+  border: 1px solid #5D6063;
+}
+
+th {
+  color: #FFF;
+  background-color: #5995DA;
+  padding: 10px;
+}
+
+td {
+  padding: 10px;
+  border: 1px solid #5D6063;
+}
+
+/*  card  */
+.card {
+  color: #414141;
+  background-color: #D6E9FE;
+  padding: 20px;
+  border: 2px solid #5995DA;
+  border-radius: 10px;
+  box-shadow: 4px 4px 10px #5D6063;
+}
+
+/*  footer  */
+footer {
+  color: #FFF;
+  background-color: #5D6063;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 0.8em;
+}
+
+footer p {
+  margin-bottom: 0;
+}
