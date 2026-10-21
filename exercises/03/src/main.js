@@ -1,60 +1,141 @@
-import './style.css'
-import heroImg from './assets/hero.png'
-import javascriptLogo from './assets/javascript.svg'
-import viteLogo from './assets/vite.svg'
-import { setupCounter } from './counter.js'
+import './style.css';
+import { calculateTotal, validateExpense } from './calculations.js';
 
-document.querySelector('#app').innerHTML = `
-<section id="center">
-  <div class="hero">
-    <img src="${heroImg}" class="base" width="170" height="179">
-    <img src="${javascriptLogo}" class="framework" alt="JavaScript logo"/>
-    <img src="${viteLogo}" class="vite" alt="Vite logo" />
-  </div>
-  <div>
-    <h1>Get started</h1>
-    <p>Edit <code>src/main.js</code> and save to test <code>HMR</code></p>
-  </div>
-  <button id="counter" type="button" class="counter"></button>
-</section>
+/**
+ * Budget Tracker Application
+ * Module 03: JavaScript Fundamentals
+ * Carlos Sánchez Cazorla (cjsanchez@uloyola.es)
+ * 
+ * Features strictly based on the Module 03 syllabus:
+ * - ES6 Modules (import/export)
+ * - Array methods (push, reduce, forEach)
+ * - Objects and arrow functions
+ * - DOM manipulation (getElementById, createElement, appendChild, textContent)
+ * - Event handling (addEventListener)
+ */
 
-<div class="ticks"></div>
+// State: list of expenses (Array of objects, Slide 19-21, 28)
+const expenses = [];
 
-<section id="next-steps">
-  <div id="docs">
-    <svg class="icon" role="presentation" aria-hidden="true"><use href="/icons.svg#documentation-icon"></use></svg>
-    <h2>Documentation</h2>
-    <p>Your questions, answered</p>
-    <ul>
-      <li>
-        <a href="https://vite.dev/" target="_blank">
-          <img class="logo" src="${viteLogo}" alt="" />
-          Explore Vite
-        </a>
-      </li>
-      <li>
-        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-          <img class="button-icon" src="${javascriptLogo}" alt="">
-          Learn more
-        </a>
-      </li>
-    </ul>
-  </div>
-  <div id="social">
-    <svg class="icon" role="presentation" aria-hidden="true"><use href="/icons.svg#social-icon"></use></svg>
-    <h2>Connect with us</h2>
-    <p>Join the Vite community</p>
-    <ul>
-      <li><a href="https://github.com/vitejs/vite" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#github-icon"></use></svg>GitHub</a></li>
-      <li><a href="https://chat.vite.dev/" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#discord-icon"></use></svg>Discord</a></li>
-      <li><a href="https://x.com/vite_js" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#x-icon"></use></svg>X.com</a></li>
-      <li><a href="https://bsky.app/profile/vite.dev" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#bluesky-icon"></use></svg>Bluesky</a></li>
-    </ul>
-  </div>
-</section>
+// DOM Elements selection (Slide 38-39)
+const expenseForm = document.getElementById('expense-form');
+const expenseNameInput = document.getElementById('expense-name');
+const expenseAmountInput = document.getElementById('expense-amount');
+const expenseList = document.getElementById('expense-list');
+const totalElement = document.getElementById('total');
+const errorMessage = document.getElementById('error-message');
 
-<div class="ticks"></div>
-<section id="spacer"></section>
-`
+/**
+ * Renders the expense list in the DOM.
+ * Follows DOM manipulation pattern from Slide 37 & 41.
+ */
+const renderExpenses = () => {
+  // Clear the existing list
+  expenseList.innerHTML = '';
 
-setupCounter(document.querySelector('#counter'))
+  if (expenses.length === 0) {
+    const emptyLi = document.createElement('li');
+    emptyLi.className = 'empty-state';
+    emptyLi.textContent = 'No expenses added yet.';
+    expenseList.appendChild(emptyLi);
+    return;
+  }
+
+  // Iterate over expenses using forEach (Slide 21, 37)
+  expenses.forEach((expense) => {
+    const li = document.createElement('li');
+    li.className = 'expense-item';
+
+    const nameSpan = document.createElement('span');
+    nameSpan.className = 'expense-name';
+    nameSpan.textContent = expense.name;
+
+    const amountSpan = document.createElement('span');
+    amountSpan.className = 'expense-amount';
+    amountSpan.textContent = `$${expense.amount.toFixed(2)}`;
+
+    // Append child nodes to list item (Slide 37, 41)
+    li.appendChild(nameSpan);
+    li.appendChild(amountSpan);
+
+    // Append list item to list
+    expenseList.appendChild(li);
+  });
+};
+
+/**
+ * Updates the total amount spent displayed in the element with id="total".
+ * Uses Array.reduce via calculateTotal (Slide 25).
+ */
+const updateTotalDisplay = () => {
+  const total = calculateTotal(expenses);
+  totalElement.textContent = total.toFixed(2);
+};
+
+/**
+ * Displays an error message to the user.
+ * 
+ * @param {string} message 
+ */
+const showError = (message) => {
+  if (errorMessage) {
+    errorMessage.textContent = message;
+    errorMessage.style.display = 'block';
+  }
+};
+
+/**
+ * Clears the error message.
+ */
+const clearError = () => {
+  if (errorMessage) {
+    errorMessage.textContent = '';
+    errorMessage.style.display = 'none';
+  }
+};
+
+/**
+ * Handles adding a new expense.
+ * Validates inputs: name must not be empty, amount must be a positive number.
+ */
+const handleAddExpense = (event) => {
+  // Prevent page refresh on form submit
+  event.preventDefault();
+
+  const rawName = expenseNameInput.value;
+  const rawAmount = parseFloat(expenseAmountInput.value);
+
+  // Validation
+  const validation = validateExpense(rawName, rawAmount);
+  if (!validation.isValid) {
+    showError(validation.message);
+    return;
+  }
+
+  // Clear any previous error
+  clearError();
+
+  // Create new expense object (Slide 28)
+  const newExpense = {
+    name: rawName.trim(),
+    amount: rawAmount,
+  };
+
+  // Add to expenses array (Slide 21, 25)
+  expenses.push(newExpense);
+
+  // Dynamically re-render the list and update total
+  renderExpenses();
+  updateTotalDisplay();
+
+  // Reset form inputs
+  expenseNameInput.value = '';
+  expenseAmountInput.value = '';
+  expenseNameInput.focus();
+};
+
+// Event listener for form submission (Slide 42)
+expenseForm.addEventListener('submit', handleAddExpense);
+
+// Initial render
+renderExpenses();

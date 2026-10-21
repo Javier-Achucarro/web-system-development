@@ -1,25 +1,43 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Budget Tracker - Exercise 03</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./src/style.css">
 </head>
 <body>
     <main class="container">
-        <h1>Budget Tracker</h1>
-        
+        <header class="header">
+            <h1>Budget Tracker</h1>
+            <p class="subtitle">Module 03: JavaScript Fundamentals</p>
+        </header>
+
         <!-- Formulario de gastos -->
-        <form id="expense-form">
+        <form id="expense-form" novalidate>
             <div class="form-group">
                 <label for="expense-name">Expense Name:</label>
-                <input type="text" id="expense-name" name="expense-name" placeholder="Ej. Groceries">
+                <input 
+                    type="text" 
+                    id="expense-name" 
+                    name="expense-name" 
+                    placeholder="e.g., Groceries" 
+                    autocomplete="off"
+                >
             </div>
             <div class="form-group">
-                <label for="expense-amount">Amount:</label>
-                <input type="number" id="expense-amount" name="expense-amount" step="0.01" placeholder="Ej. 25.50">
+                <label for="expense-amount">Amount ($):</label>
+                <input 
+                    type="number" 
+                    id="expense-amount" 
+                    name="expense-amount" 
+                    step="0.01" 
+                    placeholder="e.g., 25.50"
+                >
             </div>
+            
+            <p id="error-message" class="error-message" style="display: none;"></p>
+
             <button type="submit" id="add-btn">Add Expense</button>
         </form>
 

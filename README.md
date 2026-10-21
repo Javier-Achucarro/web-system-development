@@ -12,13 +12,20 @@ web-system-development/
 │   │   ├── index.html
 │   │   ├── Javier.html
 │   │   └── Alfonso.html
-│   └── 02/
+│   ├── 02/
+│   │   ├── index.html
+│   │   ├── Javier.html
+│   │   └── Alfonso.html
+│   │   ├── public/
+│   │   │   └── images/
+│   │   └── src/
+│   │       └── style.css
+│   └── 03/
 │       ├── index.html
-│       ├── Javier.html
-│       ├── Alfonso.html
-│       ├── public/
-│       │   └── images/
+│       ├── package.json
 │       └── src/
+│           ├── calculations.js
+│           ├── main.js
 │           └── style.css
 └── project/
 ```
@@ -40,6 +47,16 @@ Después abre http://localhost:5173
 
 ```
 cd exercises/02
+npm install
+npm run dev
+```
+
+Después abre http://localhost:5173
+
+## Ejecutar el ejercicio 03
+
+```
+cd exercises/03
 npm install
 npm run dev
 ```
