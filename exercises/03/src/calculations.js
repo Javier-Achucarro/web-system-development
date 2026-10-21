@@ -1,47 +1,37 @@
-/**
- * calculations.js
- * ES6 Module providing calculation and validation utilities.
- * Conforms to Module 03 syllabus (ES6 Modules: import/export, Arrow Functions, Array.reduce).
- */
+// calculations.js
+// Named exports used by main.js (ES6 modules)
 
-/**
- * Calculates the total spent from an array of expense objects.
- * Uses Array.prototype.reduce (Slide 25).
- * 
- * @param {Array<{name: string, amount: number}>} expenses
- * @returns {number}
- */
+// Sum of all the amounts in the array of expenses
 export const calculateTotal = (expenses) => {
-  return expenses.reduce((sum, expense) => sum + expense.amount, 0);
-};
+  return expenses.reduce((sum, expense) => sum + expense.amount, 0)
+}
 
-/**
- * Validates the expense inputs.
- * Rule: name must not be empty, amount must be a positive number.
- * 
- * @param {string} name
- * @param {number} amount
- * @returns {{isValid: boolean, message: string}}
- */
-export const validateExpense = (name, amount) => {
-  const trimmedName = name.trim();
-
-  if (trimmedName === '') {
-    return {
-      isValid: false,
-      message: 'Expense name cannot be empty.',
-    };
+// Checks the two inputs (both arrive as text) and returns
+// an object with the result and the error message to show
+export const validateExpense = (name, amountText) => {
+  if (name === '' && amountText === '') {
+    return { isValid: false, message: "You haven't entered anything." }
   }
 
-  if (isNaN(amount) || amount <= 0) {
-    return {
-      isValid: false,
-      message: 'Amount must be a positive number greater than 0.',
-    };
+  if (name === '') {
+    return { isValid: false, message: "You haven't entered a name." }
   }
 
-  return {
-    isValid: true,
-    message: '',
-  };
-};
+  // isNaN is true when the text is NOT a number, so false means "it is a number"
+  if (isNaN(name) === false) {
+    return { isValid: false, message: 'The name cannot be a number.' }
+  }
+
+  if (amountText === '') {
+    return { isValid: false, message: "You haven't entered an amount." }
+  }
+
+  // if the amount is not a number, "amount > 0" is false as well
+  const amount = parseFloat(amountText)
+  const isPositive = amount > 0
+  if (isPositive === false) {
+    return { isValid: false, message: 'The amount must be a positive number.' }
+  }
+
+  return { isValid: true, message: '' }
+}

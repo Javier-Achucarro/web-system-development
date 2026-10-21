@@ -1,141 +1,83 @@
-import './style.css';
-import { calculateTotal, validateExpense } from './calculations.js';
+import { calculateTotal, validateExpense } from './calculations.js'
 
-/**
- * Budget Tracker Application
- * Module 03: JavaScript Fundamentals
- * Carlos Sánchez Cazorla (cjsanchez@uloyola.es)
- * 
- * Features strictly based on the Module 03 syllabus:
- * - ES6 Modules (import/export)
- * - Array methods (push, reduce, forEach)
- * - Objects and arrow functions
- * - DOM manipulation (getElementById, createElement, appendChild, textContent)
- * - Event handling (addEventListener)
- */
+// State: array of expense objects
+let expenses = []
 
-// State: list of expenses (Array of objects, Slide 19-21, 28)
-const expenses = [];
+// DOM elements
+const nameInput = document.getElementById('expense-name')
+const amountInput = document.getElementById('expense-amount')
+const addButton = document.getElementById('add-btn')
+const expenseList = document.getElementById('expense-list')
+const totalElement = document.getElementById('total')
+const errorMessage = document.getElementById('error-message')
 
-// DOM Elements selection (Slide 38-39)
-const expenseForm = document.getElementById('expense-form');
-const expenseNameInput = document.getElementById('expense-name');
-const expenseAmountInput = document.getElementById('expense-amount');
-const expenseList = document.getElementById('expense-list');
-const totalElement = document.getElementById('total');
-const errorMessage = document.getElementById('error-message');
-
-/**
- * Renders the expense list in the DOM.
- * Follows DOM manipulation pattern from Slide 37 & 41.
- */
+// Draws the whole list of expenses in the DOM
 const renderExpenses = () => {
-  // Clear the existing list
-  expenseList.innerHTML = '';
+  expenseList.innerHTML = ''
 
   if (expenses.length === 0) {
-    const emptyLi = document.createElement('li');
-    emptyLi.className = 'empty-state';
-    emptyLi.textContent = 'No expenses added yet.';
-    expenseList.appendChild(emptyLi);
-    return;
+    const emptyItem = document.createElement('li')
+    emptyItem.setAttribute('class', 'empty-state')
+    emptyItem.textContent = 'No expenses added yet.'
+    expenseList.appendChild(emptyItem)
+    return
   }
 
-  // Iterate over expenses using forEach (Slide 21, 37)
   expenses.forEach((expense) => {
-    const li = document.createElement('li');
-    li.className = 'expense-item';
+    const li = document.createElement('li')
 
-    const nameSpan = document.createElement('span');
-    nameSpan.className = 'expense-name';
-    nameSpan.textContent = expense.name;
+    const nameSpan = document.createElement('span')
+    nameSpan.textContent = expense.name
 
-    const amountSpan = document.createElement('span');
-    amountSpan.className = 'expense-amount';
-    amountSpan.textContent = `$${expense.amount.toFixed(2)}`;
+    const amountSpan = document.createElement('span')
+    amountSpan.setAttribute('class', 'expense-amount')
+    amountSpan.textContent = `$${expense.amount}`
 
-    // Append child nodes to list item (Slide 37, 41)
-    li.appendChild(nameSpan);
-    li.appendChild(amountSpan);
+    li.appendChild(nameSpan)
+    li.appendChild(amountSpan)
+    expenseList.appendChild(li)
+  })
+}
 
-    // Append list item to list
-    expenseList.appendChild(li);
-  });
-};
+const updateTotal = () => {
+  totalElement.textContent = calculateTotal(expenses)
+}
 
-/**
- * Updates the total amount spent displayed in the element with id="total".
- * Uses Array.reduce via calculateTotal (Slide 25).
- */
-const updateTotalDisplay = () => {
-  const total = calculateTotal(expenses);
-  totalElement.textContent = total.toFixed(2);
-};
-
-/**
- * Displays an error message to the user.
- * 
- * @param {string} message 
- */
 const showError = (message) => {
-  if (errorMessage) {
-    errorMessage.textContent = message;
-    errorMessage.style.display = 'block';
-  }
-};
+  errorMessage.textContent = message
+  errorMessage.style.display = 'block'
+}
 
-/**
- * Clears the error message.
- */
 const clearError = () => {
-  if (errorMessage) {
-    errorMessage.textContent = '';
-    errorMessage.style.display = 'none';
-  }
-};
+  errorMessage.textContent = ''
+  errorMessage.style.display = 'none'
+}
 
-/**
- * Handles adding a new expense.
- * Validates inputs: name must not be empty, amount must be a positive number.
- */
-const handleAddExpense = (event) => {
-  // Prevent page refresh on form submit
-  event.preventDefault();
+const handleAddExpense = () => {
+  const name = nameInput.value
 
-  const rawName = expenseNameInput.value;
-  const rawAmount = parseFloat(expenseAmountInput.value);
-
-  // Validation
-  const validation = validateExpense(rawName, rawAmount);
-  if (!validation.isValid) {
-    showError(validation.message);
-    return;
+  const validation = validateExpense(name, amountInput.value)
+  if (validation.isValid === false) {
+    showError(validation.message)
+    return
   }
 
-  // Clear any previous error
-  clearError();
+  clearError()
 
-  // Create new expense object (Slide 28)
-  const newExpense = {
-    name: rawName.trim(),
-    amount: rawAmount,
-  };
+  const amount = parseFloat(amountInput.value)
 
-  // Add to expenses array (Slide 21, 25)
-  expenses.push(newExpense);
+  const newExpense = { name: name, amount: amount }
 
-  // Dynamically re-render the list and update total
-  renderExpenses();
-  updateTotalDisplay();
+  // concat creates a new array, the old one remains unchanged
+  expenses = expenses.concat(newExpense)
 
-  // Reset form inputs
-  expenseNameInput.value = '';
-  expenseAmountInput.value = '';
-  expenseNameInput.focus();
-};
+  renderExpenses()
+  updateTotal()
 
-// Event listener for form submission (Slide 42)
-expenseForm.addEventListener('submit', handleAddExpense);
+  nameInput.value = ''
+  amountInput.value = ''
+}
 
-// Initial render
-renderExpenses();
+addButton.addEventListener('click', handleAddExpense)
+
+renderExpenses()
