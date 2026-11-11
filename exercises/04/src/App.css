@@ -1,4 +1,4 @@
-/* 1. Reset universal (Diapositiva 59) */
+
 * {
   margin: 0;
   padding: 0;
@@ -10,23 +10,23 @@ body {
   font-family: "Helvetica", "Arial", sans-serif;
   font-size: 16px;
   color: #1e293b;
-  background-color: #f1f5f9; /* Fondo gris muy suave y moderno */
+  background-color: #f1f5f9; 
   display: flex;
   justify-content: center;
   padding: 30px;
 }
 
-/* 3. Contenedor general que imita la tarjeta principal de la app */
+
 #root, .app-container {
   width: 900px;
   background-color: #ffffff;
   border: 1px solid #cbd5e1;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  overflow: hidden; /* Mantiene los elementos dentro de los bordes redondeados */
+  overflow: hidden; 
 }
 
-/* 4. Barra superior estilo "Mini Shop" (Encabezado azul como en el ejemplo) */
+
 nav, .navbar, header {
   background-color: #2563eb; /* Azul corporativo brillante */
   color: #ffffff;
@@ -47,7 +47,7 @@ nav a:hover, .navbar a:hover {
   text-decoration: underline;
 }
 
-/* 5. Contenido interior y títulos */
+
 main, .content {
   padding: 30px;
 }
@@ -57,7 +57,7 @@ h1, h2 {
   margin-bottom: 20px;
 }
 
-/* 6. Barra de búsqueda */
+
 input[type="text"] {
   width: 100%;
   max-width: 350px;
@@ -73,7 +73,7 @@ input[type="text"]:focus {
   border-color: #2563eb;
 }
 
-/* 7. Listas convertidas en Tarjetas de Productos (Flexbox) */
+
 ul {
   list-style-type: none;       /* Adiós a los puntos feos de las listas */
   display: flex;
@@ -94,7 +94,7 @@ li {
   justify-content: space-between;
 }
 
-/* 8. Enlaces de los productos */
+
 li a {
   color: #2563eb;
   text-decoration: none;
@@ -107,7 +107,7 @@ li a:hover {
   text-decoration: underline;
 }
 
-/* 9. Botones modernos (Estilo azul del ejemplo) */
+
 button {
   background-color: #2563eb;
   color: #ffffff;
