@@ -1,0 +1,126 @@
+/* 1. Reset universal (Diapositiva 59) */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 2. Estilo global de la página */
+body {
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-size: 16px;
+  color: #1e293b;
+  background-color: #f1f5f9; /* Fondo gris muy suave y moderno */
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+
+/* 3. Contenedor general que imita la tarjeta principal de la app */
+#root, .app-container {
+  width: 900px;
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  overflow: hidden; /* Mantiene los elementos dentro de los bordes redondeados */
+}
+
+/* 4. Barra superior estilo "Mini Shop" (Encabezado azul como en el ejemplo) */
+nav, .navbar, header {
+  background-color: #2563eb; /* Azul corporativo brillante */
+  color: #ffffff;
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav a, .navbar a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 20px;
+}
+
+nav a:hover, .navbar a:hover {
+  text-decoration: underline;
+}
+
+/* 5. Contenido interior y títulos */
+main, .content {
+  padding: 30px;
+}
+
+h1, h2 {
+  color: #1e293b;
+  margin-bottom: 20px;
+}
+
+/* 6. Barra de búsqueda */
+input[type="text"] {
+  width: 100%;
+  max-width: 350px;
+  padding: 10px 15px;
+  margin-bottom: 25px;
+  font-size: 1em;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  outline: none;
+}
+
+input[type="text"]:focus {
+  border-color: #2563eb;
+}
+
+/* 7. Listas convertidas en Tarjetas de Productos (Flexbox) */
+ul {
+  list-style-type: none;       /* Adiós a los puntos feos de las listas */
+  display: flex;
+  flex-wrap: wrap;             /* Permite que las tarjetas bajen si no caben (Diapositiva 69) */
+  gap: 20px;                   /* Espacio entre tarjetas */
+  padding: 0;
+}
+
+li {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 20px;
+  width: calc(25% - 15px);     /* Organiza en columnas limpias */
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* 8. Enlaces de los productos */
+li a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}
+
+li a:hover {
+  text-decoration: underline;
+}
+
+/* 9. Botones modernos (Estilo azul del ejemplo) */
+button {
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 15px;
+  font-size: 0.95em;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #1d4ed8;   /* Azul más oscuro al pasar el ratón (Diapositiva 54) */
+}
